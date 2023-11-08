@@ -11,9 +11,29 @@
     <title>Weather Dashboard</title>
   </head>
   <body>
+    <header>
+      <h1>Weather Dashboard</h1>
+    </header>
+    <main>
+      <form id="city-form">
+        <input type="text" id="city-input" placeholder="Enter a city">
+        <a href="" id="city-name" class="search-btn btn btn-primary">Search</a>
+      </form>
+        <section id="current-weather" class="col-sm-8">
+            <!-- Display current weather information here -->
+        </section>
+        <section id="forecast">
+            <!-- Display 5-day forecast here -->
+        </section>
+    </main>
+    <aside>
+        <ul id="search-history">
+            <!-- Display search history here -->
+        </ul>
+    </aside>
+    </main>
     <!-- Include jQuery and custom JavaScript -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
-  </main>
   </body>
 </html>
