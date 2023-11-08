@@ -15,22 +15,32 @@
       <h1>Weather Dashboard</h1>
     </header>
     <main>
-      <form id="city-form">
-        <input type="text" id="city-input" placeholder="Enter a city">
-        <a href="" id="city-name" class="search-btn btn btn-primary">Search</a>
-      </form>
-        <section id="current-weather" class="col-sm-8">
-            <!-- Display current weather information here -->
-        </section>
-        <section id="forecast">
-            <!-- Display 5-day forecast here -->
-        </section>
-    </main>
-    <aside>
-        <ul id="search-history">
-            <!-- Display search history here -->
-        </ul>
-    </aside>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3">
+            <!-- Display search form here -->
+            <form id="city-form">
+              <input type="text" id="city-input" placeholder="Enter a city">
+              <a href="" id="city-name" class="search-btn btn btn-primary">Search</a>
+            </form>
+            <div class="horizontal-line"></div>
+            <ul id="search-history">
+              <li> Search History </li>
+                <!-- Display search history here -->
+            </ul>
+          </div>
+          <div class="col-9">
+            <section id="weather-info" class="weather-box ">
+              <p>Current Weather</p>
+              <!-- Display current weather information here -->
+            </section>
+            <section id="forecast" class="">
+              <p>5 Day Forecast</p>
+              <!-- Display 5-day forecast here -->
+            </section>
+          </div>
+        </div>
+      </div>
     </main>
     <!-- Include jQuery and custom JavaScript -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

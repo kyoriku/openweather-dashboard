@@ -19,7 +19,6 @@ header h1 {
 
 form {
   margin: 10px;
-  border-bottom: 1px solid black;
 }
 
 form input {
@@ -31,4 +30,8 @@ form input {
 .search-btn {
   margin: 5px 5px 10px 5px;
   padding: 5px 98.5px
+}
+
+.horizontal-line {
+  border-bottom: 1px solid black;
 }
