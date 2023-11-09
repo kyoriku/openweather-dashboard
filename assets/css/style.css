@@ -43,13 +43,23 @@ form input {
 }
 
 .weather-box {
-  border: 2px solid black;
-  border-radius: 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 8px;
-  padding: 16px 16px 0 16px;
+  padding: 16px;
   background-color: #ffffff;
 }
 
 .weather-box h2 {
   font-weight: bold;
+}
+
+.weather-box p:last-child {
+  margin-bottom: 5px;
+}
+
+footer {
+  color: #000000;
+  text-align: center;
 }
