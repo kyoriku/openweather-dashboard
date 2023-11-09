@@ -37,6 +37,7 @@ $(document).ready(function () {
           <p>Humidity: ${humidity}%</p>
         `;
         $('#weather-info').html(html);
+        city.val('');
       })
       .catch(function (error) {
         console.error(error);
