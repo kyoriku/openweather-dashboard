@@ -83,8 +83,8 @@ $(document).ready(function () {
 
           var html = `
             <div class="weather-box-small">
-              <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
               <p>${formattedDate}</p>
+              <img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">
               <p>Temp: ${temperature}°C</p>
               <p>Wind: ${windSpeed} m/s</p>
               <p>Humidity: ${humidity}%</p>
