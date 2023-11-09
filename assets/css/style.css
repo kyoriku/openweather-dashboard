@@ -19,19 +19,37 @@ header h1 {
 
 form {
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 form input {
-  padding: 5px 75px 5px 5px;
-  margin: 5px 0px 5px 5px;
+  padding: 5px;
+  margin: 5px;
   display: flex;
 }
 
 .search-btn {
-  margin: 5px 5px 10px 5px;
-  padding: 5px 98.5px
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .horizontal-line {
   border-bottom: 1px solid black;
+}
+
+.weather-box {
+  border: 2px solid black;
+  border-radius: 15px;
+  margin: 8px;
+  padding: 16px 16px 0 16px;
+  background-color: #ffffff;
+}
+
+.weather-box h2 {
+  font-weight: bold;
 }
