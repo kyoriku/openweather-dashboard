@@ -51,11 +51,21 @@ form input {
   background-color: #ffffff;
 }
 
-.weather-box h2 {
+.weather-box-small {
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  padding: 16px;
+  background-color: #ffffff;
+  width: 14vw;
+}
+
+.weather-box h2, .weather-box-small h2 {
   font-weight: bold;
 }
 
-.weather-box p:last-child {
+.weather-box p:last-child, .weather-box-small p:last-child {
   margin-bottom: 5px;
 }
 

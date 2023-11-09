@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- Include Bootstrap CSS from a CDN -->
+    <!-- Bootstrap CSS from a CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
-    <!-- Include custom CSS files -->
+    <!-- Custom CSS  -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather Dashboard</title>
   </head>
@@ -19,6 +19,7 @@
         <div class="row">
           <div class="col-3">
             <!-- Display search form here -->
+            <p> Search for a City </p>
             <form id="city-form">
               <input type="text" id="city-input" placeholder="Enter a city">
               <a href="" id="city-name" class="search-btn btn btn-primary">Search</a>
@@ -33,7 +34,7 @@
             <section id="weather-info" class="weather-box ">
               <!-- Display current weather information here -->
             </section>
-            <section id="forecast">
+            <section id="forecast" class="row">
               <!-- Display 5-day forecast here -->
             </section>
           </div>
@@ -43,7 +44,7 @@
     <footer>
       <p>&copy; 2023 kyoriku</p>
     </footer>
-    <!-- Include jQuery and custom JavaScript -->
+    <!-- jQuery and custom JavaScript -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>

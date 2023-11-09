@@ -77,16 +77,16 @@ $(document).ready(function () {
           var date = new Date(timestamp);
           var formattedDate = date.toLocaleDateString('en-US', {
             year: 'numeric',
-            month: 'long',
+            month: 'short',
             day: 'numeric'
           });
 
           var html = `
-            <div class="5day-forecast">
+            <div class="weather-box-small">
               <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
               <p>${formattedDate}</p>
               <p>Temp: ${temperature}°C</p>
-              <p>Wind Speed: ${windSpeed} m/s</p>
+              <p>Wind: ${windSpeed} m/s</p>
               <p>Humidity: ${humidity}%</p>
             </div>
           `;
