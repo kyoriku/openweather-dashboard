@@ -35,8 +35,8 @@ $(document).ready(function () {
           <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
           <p>${formattedDate}</p>
           <p>Temp: ${temperature}°C</p>
-          <p>Wind Speed: ${windSpeed} m/s</p>
           <p>Humidity: ${humidity}%</p>
+          <p>Wind Speed: ${windSpeed} m/s</p>
         `;
         $('#current-weather').html(html);
         $('#city-input').val('');
@@ -70,6 +70,7 @@ $(document).ready(function () {
       .then(function (data) {
         console.log(data);
         $('#five-day-forecast').empty();
+        $('.day-forecast').empty().append('<h4>5-Day Forecast:</h4>');
         var forecasts = data.list;
         var indicesToDisplay = [7, 15, 23, 31, 39];
         indicesToDisplay.forEach(function (index) {
@@ -93,8 +94,8 @@ $(document).ready(function () {
               <p>${formattedDate}</p>
               <img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">
               <p>Temp: ${temperature}°C</p>
-              <p>Wind: ${windSpeed} m/s</p>
               <p>Humidity: ${humidity}%</p>
+              <p>Wind: ${windSpeed} m/s</p>
             </div>
           `;
           $('#five-day-forecast').append(html);
@@ -141,8 +142,8 @@ $(document).ready(function () {
         <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
         <p>${formattedDate}</p>
         <p>Temp: ${temperature}°C</p>
-        <p>Wind Speed: ${windSpeed} m/s</p>
         <p>Humidity: ${humidity}%</p>
+        <p>Wind Speed: ${windSpeed} m/s</p>
       `;
       $('#current-weather').html(html);
     })
@@ -170,6 +171,7 @@ $(document).ready(function () {
     event.preventDefault();
     var clickedCity = $(this).text();
     displayWeatherForCity(clickedCity);
+    $('.day-forecast').empty().append('<h4>5-Day Forecast:</h4>');
   });
 
   function displayWeatherForCity(city) {
@@ -203,8 +205,8 @@ $(document).ready(function () {
           <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
           <p>${formattedDate}</p>
           <p>Temp: ${temperature}°C</p>
-          <p>Wind Speed: ${windSpeed} m/s</p>
           <p>Humidity: ${humidity}%</p>
+          <p>Wind Speed: ${windSpeed} m/s</p>
         `;
         $('#current-weather').html(currentWeatherHtml);
       })
@@ -244,8 +246,8 @@ $(document).ready(function () {
               <p>${formattedDate}</p>
               <img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">
               <p>Temp: ${temperature}°C</p>
-              <p>Wind: ${windSpeed} m/s</p>
               <p>Humidity: ${humidity}%</p>
+              <p>Wind: ${windSpeed} m/s</p>
             </div>
           `;
           $('#five-day-forecast').append(forecastHtml);

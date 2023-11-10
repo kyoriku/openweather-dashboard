@@ -1,0 +1,23 @@
+@media screen and (max-width: 768px) {
+  .weather-box {
+    margin-top: 0;
+  }
+
+  .weather-box-small {
+    width: 49%;
+  }
+
+  .forecast-box {
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+  }
+
+  .day-forecast {
+    text-align: center;
+  }
+
+  .day-forecast h4 {
+    padding-left: 0;
+  }
+}
