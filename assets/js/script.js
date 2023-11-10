@@ -38,7 +38,7 @@ $(document).ready(function () {
           <p>Wind Speed: ${windSpeed} m/s</p>
           <p>Humidity: ${humidity}%</p>
         `;
-        $('#weather-info').html(html);
+        $('#current-weather').html(html);
         city.val('');
       })
       .catch(function (error) {
@@ -63,6 +63,7 @@ $(document).ready(function () {
       })
       .then(function (data) {
         console.log(data);
+        $('#five-day-forecast').empty();
         var forecasts = data.list;
         var indicesToDisplay = [7, 15, 23, 31, 39];
         indicesToDisplay.forEach(function (index) {
@@ -90,7 +91,7 @@ $(document).ready(function () {
               <p>Humidity: ${humidity}%</p>
             </div>
           `;
-          $('#forecast').append(html);
+          $('#five-day-forecast').append(html);
         });
       })
       .catch(function (error) {
@@ -137,7 +138,7 @@ $(document).ready(function () {
         <p>Wind Speed: ${windSpeed} m/s</p>
         <p>Humidity: ${humidity}%</p>
       `;
-      $('#weather-info').html(html);
+      $('#current-weather').html(html);
     })
     .catch(function (error) {
       console.error(error);

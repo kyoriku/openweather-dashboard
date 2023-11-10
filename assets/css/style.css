@@ -1,5 +1,6 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
 }
 
 body {
@@ -14,7 +15,6 @@ header {
 
 header h1 {
   font-weight: bold;
-  color: #000000;
 }
 
 form {
@@ -55,10 +55,10 @@ form input {
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 5px;
   padding: 16px;
   background-color: #ffffff;
   width: 14vw;
+  text-align: center;
 }
 
 .weather-box h2, .weather-box-small h2 {
@@ -69,7 +69,25 @@ form input {
   margin-bottom: 5px;
 }
 
+.weather-box-small p:first-child {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.forecast-box {
+  margin: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 footer {
-  color: #000000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
   text-align: center;
+  margin: 6px;
 }
