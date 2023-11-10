@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  // function for current weather
+  // --- Current weather --- //
   var btnEl = $('#city-name');
 
   btnEl.on('click', function (event) {
@@ -39,14 +39,20 @@ $(document).ready(function () {
           <p>Humidity: ${humidity}%</p>
         `;
         $('#current-weather').html(html);
-        city.val('');
+        $('#city-input').val('');
+
+        if (!searchedCities.includes(data.city.name)) {
+          searchedCities.push(data.city.name);
+          localStorage.setItem('searchedCities', JSON.stringify(searchedCities));
+          displaySearchedCities();
+        }
       })
       .catch(function (error) {
         console.error(error);
       });
   });
 
-  // function for five day forecast
+  // --- Five day forecast --- //
   var btnEl = $('#city-name');
 
   btnEl.on('click', function (event) {
@@ -99,7 +105,7 @@ $(document).ready(function () {
       });
   });
 
-  // function for current weather of random city
+  // --- Current weather of random city --- //
   var cities = [
     'Toronto', 'Ottawa', 'Barrie', 'Vancouver', 'Montreal', 'Calgary', 'Edmonton', 'Victoria', 'Saskatoon', 'Winnipeg',
     'New York', 'Los Angeles', 'Chicago', 'Miami', 'San Francisco', 'London', 'Paris', 'Berlin', 'Tokyo', 'Hong Kong',
@@ -143,4 +149,110 @@ $(document).ready(function () {
     .catch(function (error) {
       console.error(error);
     });
+
+  // --- List of searched cities --- //
+  var searchedCities = JSON.parse(localStorage.getItem('searchedCities')) || [];
+
+  displaySearchedCities();
+
+    function displaySearchedCities() {
+      var citiesList = $('#searched-cities-list');
+      citiesList.empty();
+  
+      searchedCities.forEach(function (city) {
+        var link = $('<a>').text(city).attr('href', '#').addClass('searched-city-link');
+        var listItem = $('<li>').append(link);
+        citiesList.append(listItem);
+      });
+    }
+
+  $(document).on('click', '.searched-city-link', function (event) {
+    event.preventDefault();
+    var clickedCity = $(this).text();
+    displayWeatherForCity(clickedCity);
+  });
+
+  function displayWeatherForCity(city) {
+    var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=f6b141e534d676de278407d71aeb88e4`;
+    var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&cnt=40&appid=f6b141e534d676de278407d71aeb88e4`;
+  
+    fetch(currentWeatherUrl)
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('City not found');
+        }
+      })
+      .then(function (currentWeatherData) {
+        var cityName = currentWeatherData.name;
+        var temperature = currentWeatherData.main.temp;
+        temperature = Math.round(temperature);
+        var humidity = currentWeatherData.main.humidity;
+        var windSpeed = currentWeatherData.wind.speed;
+        var weatherIcon = currentWeatherData.weather[0].icon;
+        var timestamp = currentWeatherData.dt * 1000;
+        var date = new Date(timestamp);
+        var formattedDate = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+  
+        var currentWeatherHtml = `
+          <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
+          <p>${formattedDate}</p>
+          <p>Temp: ${temperature}°C</p>
+          <p>Wind Speed: ${windSpeed} m/s</p>
+          <p>Humidity: ${humidity}%</p>
+        `;
+        $('#current-weather').html(currentWeatherHtml);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  
+    fetch(forecastUrl)
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Forecast data not available');
+        }
+      })
+      .then(function (forecastData) {
+        $('#five-day-forecast').empty();
+        var forecasts = forecastData.list;
+        var indicesToDisplay = [7, 15, 23, 31, 39];
+        indicesToDisplay.forEach(function (index) {
+          var forecast = forecasts[index];
+          var temperature = forecast.main.temp;
+          temperature = Math.round(temperature);
+          var humidity = forecast.main.humidity;
+          var windSpeed = forecast.wind.speed;
+          var weatherIcon = forecast.weather[0].icon;
+          var timestamp = forecast.dt * 1000;
+          var date = new Date(timestamp);
+          var formattedDate = date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+  
+          var forecastHtml = `
+            <div class="weather-box-small">
+              <p>${formattedDate}</p>
+              <img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">
+              <p>Temp: ${temperature}°C</p>
+              <p>Wind: ${windSpeed} m/s</p>
+              <p>Humidity: ${humidity}%</p>
+            </div>
+          `;
+          $('#five-day-forecast').append(forecastHtml);
+        });
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
 });
