@@ -39,6 +39,10 @@ form input {
   display: flex;
 }
 
+#error-message {
+  color: #ff0000;
+}
+
 .search-btn {
   margin: 5px 0;
   padding: 5px;
