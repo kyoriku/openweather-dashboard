@@ -1,4 +1,7 @@
 @media screen and (max-width: 768px) {
+  .city-search {
+    justify-content: center;
+  }
   .weather-box {
     margin-top: 0;
   }
