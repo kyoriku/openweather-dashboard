@@ -25,5 +25,13 @@ As a traveler, the Weather Dashboard addresses the need to efficiently plan trip
 
 In summary, this Weather Dashboard enhances the travel experience by offering a user-friendly platform for accessing detailed weather information, ensuring that travelers can plan their trips with confidence and be prepared for any weather conditions they may encounter.
 
+## Usage
+> [Link to deployed application](https://kyoriku.github.io/weather-dashboard/)
+
+![Screenshot](assets/images/weather-dashboard.png)
+## Credits
+- [OpenWeatherMap - Current weather data](https://openweathermap.org/current)
+- [OpenWeatherMap - 5 day weather forecast](https://openweathermap.org/forecast5)
+
 ## License
 Please refer to the LICENSE in the repo.
