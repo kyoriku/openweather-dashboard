@@ -29,6 +29,7 @@ In summary, this Weather Dashboard enhances the travel experience by offering a 
 > [Link to deployed application](https://kyoriku.github.io/weather-dashboard/)
 
 ![Screenshot](assets/images/weather-dashboard.png)
+
 ## Credits
 - [OpenWeatherMap - Current weather data](https://openweathermap.org/current)
 - [OpenWeatherMap - 5 day weather forecast](https://openweathermap.org/forecast5)

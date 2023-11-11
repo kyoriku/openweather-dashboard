@@ -139,12 +139,6 @@ ul li {
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-footer p {
   text-align: center;
-  margin: 6px;
+  padding-top: 63px;
 }
