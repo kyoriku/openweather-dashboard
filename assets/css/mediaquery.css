@@ -23,4 +23,8 @@
   .day-forecast h4 {
     padding-left: 0;
   }
+
+  footer {
+    padding-top: 16px;
+  }
 }
