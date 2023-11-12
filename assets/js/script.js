@@ -1,25 +1,32 @@
 $(document).ready(function () {
 
+  // Select the button element with the ID 'city-name'
   var btnEl = $('#city-name');
 
+  // Attach a click event handler to the button
   btnEl.on('click', function (event) {
     event.preventDefault();
 
+    // Get the city input value and trim any leading or trailing spaces
     var city = $('#city-input').val().trim();
 
+    // Check if the input is empty, and display an error message if so
     if (city === "") {
-        displayErrorMessage("Please enter a city name");
-        return;
+      displayErrorMessage("Please enter a city name");
+      return;
     }
 
-    displayWeatherForCity(city); 
+    // Display the weather for the entered city
+    displayWeatherForCity(city);
   });
 
+  // Function to display weather and forecast for a specific city
   function displayWeatherForCity(city) {
+    // URLs for current weather and 5-day forecast using OpenWeatherMap API
     var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=f6b141e534d676de278407d71aeb88e4`;
     var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&cnt=40&appid=f6b141e534d676de278407d71aeb88e4`;
 
-    // <----- Current weather -----> //
+    // Fetch the current weather data
     fetch(currentWeatherUrl)
       .then(function (response) {
         if (response.ok) {
@@ -30,6 +37,7 @@ $(document).ready(function () {
         return response.json();
       })
       .then(function (currentWeatherData) {
+        // Extract relevant data from the response
         var cityName = currentWeatherData.name;
         var temperature = Math.round(currentWeatherData.main.temp);
         var humidity = currentWeatherData.main.humidity;
@@ -43,6 +51,7 @@ $(document).ready(function () {
           day: 'numeric'
         });
 
+        // Create HTML for displaying the current weather
         var currentWeatherHtml = `
           <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
           <p>${formattedDate}</p>
@@ -50,9 +59,12 @@ $(document).ready(function () {
           <p>Humidity: ${humidity}%</p>
           <p>Wind Speed: ${windSpeed} m/s</p>
         `;
+        // Update the HTML of the element with ID 'current-weather'
         $('#current-weather').html(currentWeatherHtml);
+        // Clear the city input field
         $('#city-input').val('');
 
+        // Update the list of searched cities and display them
         if (!searchedCities.includes(currentWeatherData.name)) {
           searchedCities.push(currentWeatherData.name);
           localStorage.setItem('searchedCities', JSON.stringify(searchedCities));
@@ -64,7 +76,7 @@ $(document).ready(function () {
         displayErrorMessage(error.message);
       });
 
-    // <----- 5-day forecast -----> //
+    // Fetch the 5-day forecast data
     fetch(forecastUrl)
       .then(function (response) {
         if (response.ok) {
@@ -75,8 +87,11 @@ $(document).ready(function () {
         return response.json();
       })
       .then(function (forecastData) {
+        // Clear previous forecast data
         $('#five-day-forecast').empty();
         $('.day-forecast').empty().append('<h4>5-Day Forecast:</h4>');
+
+        // Extract and display 5-day forecast data 
         var forecasts = forecastData.list;
         var indicesToDisplay = [6, 14, 22, 30, 38];
         indicesToDisplay.forEach(function (index) {
@@ -93,6 +108,7 @@ $(document).ready(function () {
             day: 'numeric'
           });
 
+          // Create HTML for displaying the 5-day forecast
           var forecastHtml = `
             <div class="weather-box-small">
               <p>${formattedDate}</p>
@@ -102,6 +118,7 @@ $(document).ready(function () {
               <p>Wind: ${windSpeed} m/s</p>
             </div>
           `;
+          // Update the HTML of the element with ID 'five-day-forecast'
           $('#five-day-forecast').append(forecastHtml);
         });
       })
@@ -111,32 +128,38 @@ $(document).ready(function () {
       });
   }
 
-  // <----- Local storage -----> //
+  // Retrieve searched cities from local storage or initialize an empty array
   var searchedCities = JSON.parse(localStorage.getItem('searchedCities')) || [];
 
-  displaySearchedCities();
-
+  // Function to display the list of searched cities
   function displaySearchedCities() {
     var citiesList = $('#searched-cities-list');
     citiesList.empty();
 
     searchedCities.forEach(function (city) {
+      // Create a link for each searched city
       var link = $('<a>').text(city).attr('href', '#').addClass('searched-city-link');
       var listItem = $('<li>').append(link);
       citiesList.append(listItem);
     });
   }
 
+  // Display the list of searched cities
+  displaySearchedCities();
+
+  // Event handler for clicking on a searched city link
   $(document).on('click', '.searched-city-link', function (event) {
     event.preventDefault();
+    // Display weather for the clicked searched city
     var clickedCity = $(this).text();
     displayWeatherForCity(clickedCity);
+    // Clear previous 5-day forecast and error message
     $('.day-forecast').empty().append('<h4>5-Day Forecast:</h4>');
     clearErrorMessage();
   });
 
-   // <----- Current weather of random predefined city -----> //
-   var cities = [
+  // Display the current weather of a random predefined city
+  var cities = [
     'Toronto', 'Ottawa', 'Barrie', 'Vancouver', 'Montreal', 'Calgary', 'Edmonton', 'Victoria', 'Saskatoon', 'Winnipeg',
     'New York', 'Los Angeles', 'Chicago', 'Miami', 'San Francisco', 'London', 'Paris', 'Berlin', 'Tokyo', 'Hong Kong',
   ];
@@ -154,6 +177,7 @@ $(document).ready(function () {
       return response.json();
     })
     .then(function (data) {
+      // Extract relevant data from the response
       var cityName = data.city.name;
       var temperature = Math.round(data.list[0].main.temp);
       var humidity = data.list[0].main.humidity;
@@ -167,6 +191,7 @@ $(document).ready(function () {
         day: 'numeric'
       });
 
+      // Create HTML for displaying the current weather of the random city
       var html = `
         <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
         <p>${formattedDate}</p>
@@ -174,6 +199,7 @@ $(document).ready(function () {
         <p>Humidity: ${humidity}%</p>
         <p>Wind Speed: ${windSpeed} m/s</p>
       `;
+      // Update the HTML of the element with ID 'current-weather'
       $('#current-weather').html(html);
     })
     .catch(function (error) {
