@@ -90,6 +90,7 @@ $(document).ready(function () {
         // Clear previous forecast data
         $('#five-day-forecast').empty();
         $('.day-forecast').empty().append('<h4>5-Day Forecast:</h4>');
+        clearErrorMessage()
 
         // Extract and display 5-day forecast data 
         var forecasts = forecastData.list;
@@ -142,7 +143,28 @@ $(document).ready(function () {
       var listItem = $('<li>').append(link);
       citiesList.append(listItem);
     });
+
+    // Check if there are cities in the searchedCities array
+    if (searchedCities.length > 0) {
+      // If there are cities, show the clear storage button
+      $('#clear-storage-btn').show();
+    } else {
+      // If there are no cities, hide the clear storage button
+      $('#clear-storage-btn').hide();
+    }
   }
+
+  // Attach a click event handler to the clear storage button
+  $('#clear-storage-btn').on('click', function (event) {
+    event.preventDefault();
+
+    // Clear local storage
+    localStorage.clear();
+    // Clear the searchedCities array
+    searchedCities = [];
+    // Update the display of searched cities
+    displaySearchedCities();
+  });
 
   // Display the list of searched cities
   displaySearchedCities();

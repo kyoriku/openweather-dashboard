@@ -89,6 +89,14 @@ ul li {
   color: #ffffff;
 }
 
+.clear-btn {
+  display: flex;
+  justify-content: center;
+  margin: -5px 0 10px 0;
+  padding: 5px;
+  width: 100%;
+}
+
 .weather-box {
   border: 1px solid black;
   border-radius: 10px;
