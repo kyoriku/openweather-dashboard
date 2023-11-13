@@ -3,6 +3,8 @@ var clearStorageBtnEl = $('#clear-storage-btn');
 var searchedCities = JSON.parse(localStorage.getItem('searchedCities')) || [];
 
 $(document).ready(function () {
+
+  // Event handler for the search button click
   searchCityBtnEl.on('click', function (event) {
     event.preventDefault();
     var city = $('#city-input').val().trim();
@@ -13,6 +15,7 @@ $(document).ready(function () {
     displayWeatherForCity(city);
   });
 
+  // Function to display weather for a given city
   function displayWeatherForCity(city) {
     var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=f6b141e534d676de278407d71aeb88e4`;
     var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&cnt=40&appid=f6b141e534d676de278407d71aeb88e4`;
@@ -21,27 +24,34 @@ $(document).ready(function () {
     fetchForecast(forecastUrl);
   }
 
+  // Function to fetch current weather data
   function fetchCurrentWeather(url) {
     fetchWeatherData(url)
       .then(function (currentWeatherData) {
+        console.log(currentWeatherData)
         updateCurrentWeatherUI(currentWeatherData);
         updateSearchedCities(currentWeatherData.name);
       })
       .catch(function (error) {
+        console.log(error)
         handleWeatherError(error);
       });
   }
 
+  // Function to fetch forecast data
   function fetchForecast(url) {
     fetchWeatherData(url)
       .then(function (forecastData) {
+        console.log(forecastData)
         updateForecastUI(forecastData);
       })
       .catch(function (error) {
+        console.log(error)
         handleWeatherError(error);
       });
   }
 
+  // Function to fetch weather data from the API
   function fetchWeatherData(url) {
     return fetch(url)
       .then(function (response) {
@@ -53,6 +63,7 @@ $(document).ready(function () {
       });
   }
 
+  // Function to update the UI with current weather information
   function updateCurrentWeatherUI(data, addToSearchedCities = true) {
     var cityName = data.name;
     var temperature = Math.round(data.main.temp);
@@ -67,6 +78,7 @@ $(document).ready(function () {
       day: 'numeric'
     });
 
+    // Create HTML to display the current weather
     var currentWeatherHtml = `
       <h2>${cityName}<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon"></h2>
       <p>${formattedDate}</p>
@@ -77,6 +89,7 @@ $(document).ready(function () {
     $('#current-weather').html(currentWeatherHtml);
     $('#city-input').val('');
 
+    // Add the city to the searched cities list and update local storage
     if (addToSearchedCities && !searchedCities.includes(cityName)) {
       searchedCities.push(cityName);
       localStorage.setItem('searchedCities', JSON.stringify(searchedCities));
@@ -84,6 +97,7 @@ $(document).ready(function () {
     }
   }
 
+  // Function to update the UI with 5-day forecast information
   function updateForecastUI(data) {
     $('#five-day-forecast').empty();
     $('.day-forecast').empty().append('<h4>5-Day Forecast:</h4>');
@@ -103,6 +117,7 @@ $(document).ready(function () {
         day: 'numeric'
       });
 
+      // Create HTML for the 5-day forecast
       var forecastHtml = `
         <div class="weather-box-small">
           <p>${formattedDate}</p>
@@ -116,6 +131,7 @@ $(document).ready(function () {
     });
   }
 
+  // Function to update the list of searched cities
   function updateSearchedCities() {
     var citiesList = $('#searched-cities-list');
     citiesList.empty();
@@ -127,11 +143,7 @@ $(document).ready(function () {
     });
   }
 
-  function handleWeatherError(error) {
-    console.log(error);
-    displayErrorMessage(error.message);
-  }
-
+  // Function to display searched cities
   function displaySearchedCities() {
     var citiesList = $('#searched-cities-list');
     citiesList.empty();
@@ -142,6 +154,7 @@ $(document).ready(function () {
       citiesList.append(listItem);
     });
 
+    // Show or hide the clear storage button based on the number of searched cities
     if (searchedCities.length > 0) {
       $('#clear-storage-btn').show();
     } else {
@@ -149,17 +162,7 @@ $(document).ready(function () {
     }
   }
 
-  function clearLocalStorage() {
-    localStorage.clear();
-    searchedCities = [];
-    displaySearchedCities();
-  };
-
-  clearStorageBtnEl.on('click', function (event) {
-    event.preventDefault();
-    clearLocalStorage();
-  });
-
+  // Event handler for clicking on a searched city link
   $(document).on('click', '.searched-city-link', function (event) {
     event.preventDefault();
     var clickedCity = $(this).text();
@@ -168,6 +171,20 @@ $(document).ready(function () {
     clearErrorMessage();
   });
 
+  // Function to clear local storage and reset the searched cities list
+  function clearLocalStorage() {
+    localStorage.clear();
+    searchedCities = [];
+    displaySearchedCities();
+  };
+
+  // Event handler for clicking on the clear storage button
+  clearStorageBtnEl.on('click', function (event) {
+    event.preventDefault();
+    clearLocalStorage();
+  });
+
+  // Predefined list of cities and fetching weather for a random city
   var cities = [
     'Toronto', 'Ottawa', 'Barrie','Hamilton', 'Vancouver', 'Montreal', 'Calgary', 'Edmonton', 'Saskatoon', 'Winnipeg', 
     'New York', 'San Francisco', 'San Diego', 'Los Angeles', 'Las Vegas', 'Chicago', 'Boston', 'Austin', 'Orlando', 'Miami',
@@ -178,10 +195,12 @@ $(document).ready(function () {
 
   fetchRandomCityWeather(apiUrl);
 
+  // Function to get a random city from the list
   function getRandomCity(cityList) {
     return cityList[Math.floor(Math.random() * cityList.length)];
   }
 
+  // Function to fetch and display weather for a random city
   function fetchRandomCityWeather(url) {
     fetchWeatherData(url)
       .then(function (currentWeatherData) {
@@ -192,13 +211,22 @@ $(document).ready(function () {
       });
   }
 
+  // Function to handle errors
+  function handleWeatherError(error) {
+    console.log(error);
+    displayErrorMessage(error.message);
+  }
+
+  // Function to display an error message
   function displayErrorMessage(message) {
     $('#error-message').text(message);
   }
 
+  // Function to clear the error message
   function clearErrorMessage() {
     $('#error-message').empty();
   }
 
+  // Display the searched cities when the page is loaded
   displaySearchedCities();
 });
