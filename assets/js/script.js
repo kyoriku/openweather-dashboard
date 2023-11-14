@@ -255,6 +255,27 @@ $(document).ready(function () {
     displayWeatherForCity(city);
   });
 
+  // Event handler for pressing the Enter key in the input field
+  $('#city-input').keypress(function (event) {
+    if (event.keyCode === 13) {
+      // Prevent the default form submission behavior
+      event.preventDefault();
+
+      // Get the value entered in the city input field
+      var city = $('#city-input').val().trim();
+
+      // Check if the input is empty
+      if (city === "") {
+        // Display an error message if the input is empty
+        displayErrorMessage("Please enter a city name");
+        return;
+      }
+
+      // Display weather information for the entered city
+      displayWeatherForCity(city);
+    }
+  });
+
   // Event handler for clicking a city on the list
   $(document).on('click', '.searched-city-link', function (event) {
     // Prevent the default link click behavior
