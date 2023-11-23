@@ -4,18 +4,26 @@
 
 body {
   background-color: #f9fbfd;
-    color: #000000;
+  color: #000000;
+  background-image: url("../images/thunderstorm.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
 
 header {
-  background: linear-gradient(to right, #000000, #66a5ad, #66a5ad, #4b0082);
   text-align: center;
   padding: 16px;
+  color: #ffffff;
 }
 
 header h1 {
   font-weight: bold;
   margin: 0;
+}
+
+h3, h4 {
+  color: #ffffff;
 }
 
 .city-search {
@@ -52,7 +60,7 @@ form input {
 }
 
 .horizontal-line {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(255, 255, 255);
 }
 
 ul li {
@@ -153,4 +161,5 @@ footer {
 
 footer p {
   margin: 0px;
+  color: #ffffff;
 }
