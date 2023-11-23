@@ -5,7 +5,7 @@
 body {
   background-color: #f9fbfd;
   color: #000000;
-  background-image: url(../images/thunderstorm.jpg);
+  background-image: url("../images/thunderstorm.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
