@@ -167,28 +167,40 @@ $(document).ready(function () {
     });
   }
 
-  // Function to display searched cities
-  function displaySearchedCities() {
-    // Get the container for searched cities list
-    var citiesList = $('#searched-cities-list');
-    // Clear the existing list
-    citiesList.empty();
+// Function to display searched cities
+function displaySearchedCities() {
+  // Get the container for searched cities list
+  var citiesList = $('#searched-cities-list');
+  // Clear the existing list
+  citiesList.empty();
 
-    // Iterate over searched cities and create links for each
-    searchedCities.forEach(function (city) {
-      var link = $('<a>').text(city).attr('href', '#').addClass('searched-city-link');
-      var listItem = $('<li>').append(link);
-      // Add the link to the list container
-      citiesList.append(listItem);
-    });
+  // Iterate over searched cities and create links for each
+  searchedCities.forEach(function (city) {
+    var link = $('<a>').text(city).attr('href', '#').addClass('searched-city-link');
+    var listItem = $('<li>').append(link);
+    // Add the link to the list container
+    citiesList.append(listItem);
+  });
 
-    // Show or hide the clear storage button based on the number of searched cities
-    if (searchedCities.length > 0) {
-      $('#clear-storage-btn').show();
-    } else {
-      $('#clear-storage-btn').hide();
+  // Show or hide elements based on the number of searched cities
+  if (searchedCities.length > 0) {
+    // Show top horizontal line with animation
+    $('.horizontal-line').first().show();
+    
+    // Add bottom line if it doesn't exist
+    if ($('.horizontal-line-bottom').length === 0) {
+      citiesList.after('<section class="horizontal-line horizontal-line-bottom"></section>');
     }
+    $('#clear-storage-btn').show();
+  } else {
+    // Hide top horizontal line
+    $('.horizontal-line').first().hide();
+    
+    // Remove bottom line
+    $('.horizontal-line-bottom').remove();
+    $('#clear-storage-btn').hide();
   }
+}
 
   // Function to clear local storage and reset the searched cities list
   function clearLocalStorage() {

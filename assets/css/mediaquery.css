@@ -14,7 +14,7 @@
   .forecast-box {
     flex-wrap: wrap;
     gap: 5px;
-    margin-top: 5px;
+    margin: 12px 0;
   }
 
   .day-forecast {
@@ -23,9 +23,5 @@
 
   .day-forecast h4 {
     padding-left: 0;
-  }
-
-  footer {
-    padding-top: 16px;
   }
 }
